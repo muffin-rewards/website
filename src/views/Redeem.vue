@@ -4,9 +4,9 @@
       <div class="hero-head">
         <nav class="nav" role="navigation" aria-label="main navigation">
           <div class="nav-menu">
-            <div class="nav-item">
+            <router-link class="nav-item" :to="{ name: 'home' }">
               <img src="@/assets/images/muffin-logo.png" alt="Muffin">
-            </div>
+            </router-link>
           </div>
           <div class="nav-spacer"></div>
           <div class="nav-menu">
@@ -75,6 +75,7 @@
 
           <div class="column is-4">
             <div class="step box" :class="{ 'is-faded': stages.post === 'waiting' }">
+              <span class="is-pulled-right has-text-white" v-show="stages.redeem === 'waiting'"><i class="fas fa-lock"></i></span>
               <small class="has-text-weight-bold has-text-primary">STEP 2</small>
               <h3 class="title is-4">Make Your Post</h3>
               <p class="subtitle is-6 has-text-weight-light">Post a photo of your food and come back here and tap below.</p>
@@ -108,6 +109,7 @@
 
           <div class="column is-4">
             <div class="step box" :class="{ 'is-faded': stages.redeem === 'waiting' }">
+              <span class="is-pulled-right has-text-white" v-show="stages.redeem === 'waiting'"><i class="fas fa-lock"></i></span>
               <small class="has-text-weight-bold has-text-primary">STEP 3</small>
               <h3 class="title is-4">Claim Your Reward</h3>
               <p class="subtitle is-6 has-text-weight-light">Show the voucher below to your waiter/waitress to claim your discount.</p>

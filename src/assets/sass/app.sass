@@ -1,0 +1,114 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:700|Muli:300,400,700)
+
+$primary: #D72A52
+$secondary: #268AFF
+$success: #4caf50
+$danger: #b83636
+$family-sans-serif: Muli, sans-serif
+$black-ter: #22243B
+$black-bis: #0D0F2B
+$radius-medium: 4px
+$radius-large: 8px
+
+@import ~bulma/bulma
+
+body, html
+  min-height: 100%
+  background: $black-bis
+
+.title
+  font-family: Fira Sans, sans-serif
+  font-weight: bold
+
+.subtitle
+  opacity: 0.85
+
+.nav
+  display: flex
+
+  .nav-spacer
+    flex: 1
+
+  .nav-menu
+    .nav-item
+      display: flex
+      align-items: center
+      justify-content: center
+      height: 4rem
+      padding: 1rem
+
+      img
+        max-height: 100%
+        width: auto
+        max-width: auto
+
+    .nav-burger
+      border-radius: 1.5px
+      border-top: 3px solid white
+      display: block
+      height: 16px
+      position: relative
+      width: 22px
+
+      &:before, &:after
+        background: white
+        border-radius: 1.5px
+        content: ''
+        height: 3px
+        position: absolute
+        right: 0
+        top: 50%
+        width: 70%
+
+      &:after
+        top: calc(100% + 2px)
+        width: 80%
+
+.step
+  border-radius: $radius-medium
+  background: $black-ter
+  height: 100%
+
+  &.is-faded
+    opacity: 0.6
+
+  .title
+    color: white
+
+  .subtitle
+    color: $white-ter
+
+.button
+  border-radius: $radius-large
+
+  &.is-secondary
+    background: $secondary
+    border-color: $secondary
+    color: $white-ter
+
+  &.is-grey
+    background: $grey
+    border-color: $grey
+    color: $white-ter
+
+  &.is-transparent
+    background: transparent
+    border-color: transparent
+    color: $grey-light
+
+.has-text-secondary
+  color: $secondary !important
+
+.hero.temp-cubana-bg
+  background-image: url(/img/smoothie.png)
+  background-size: cover
+
+
+#qr-container
+  display: flex
+  justify-content: center
+
+  #qr
+    border: 10px solid white
+    border-radius: $radius-large
+    margin: 0 auto

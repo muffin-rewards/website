@@ -151,7 +151,7 @@ export default {
       this.stages.auth = 'pending'
 
       const authWindow = window.open(
-        'https://api.instagram.com/oauth/authorize/?client_id=4b48b64761ae4d048d6ab2c85f56a654&redirect_uri=http://172.16.1.82:8080/auth/instagram&response_type=token',
+        `https://api.instagram.com/oauth/authorize/?client_id=4b48b64761ae4d048d6ab2c85f56a654&redirect_uri=${location.origin}/auth/instagram&response_type=token`,
         'Connect Instagram',
         'width=500,height=500'
       )
@@ -206,7 +206,7 @@ export default {
     },
 
     claimCode (code) {
-      QR.toCanvas(this.$refs.qr, `http://172.16.1.82:8080/admin/redeem?code=${code}`, () => { this.qrShown = true })
+      QR.toCanvas(this.$refs.qr, `${location.origin}/admin/redeem?code=${code}`, () => { this.qrShown = true })
     }
   }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "website",
-  "short_name": "website",
+  "name": "Muffin",
+  "short_name": "Muffin",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

@@ -13,10 +13,13 @@
         </div>
       </div>
     </nav>
+
     <div class="line"></div>
+
     <router-link to="/cubana">
       <img src="@/assets/images/cubana.png" alt="Cubana">
     </router-link>
+
     <div class="line"></div>
     <img src="@/assets/images/dominos.png" alt="Dominos">
     <div class="line"></div>

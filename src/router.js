@@ -13,19 +13,9 @@ export default new Router({
       component: () => import('./views/Home')
     },
     {
-      path: '/auth/:provider',
-      name: 'auth.callback',
-      component: () => import('./views/auth/Callback')
-    },
-    {
-      path: '/admin/redeem',
-      name: 'admin.redeem',
-      component: () => import('./views/admin/Redeem')
-    },
-    {
       path: '/:promoter',
-      name: 'redeem',
-      component: () => import('./views/Redeem')
+      name: 'Reward',
+      component: () => import('./views/Reward')
     }
   ]
 })

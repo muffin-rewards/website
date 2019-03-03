@@ -1,85 +1,94 @@
+
 @import url(https://fonts.googleapis.com/css?family=Fira+Sans:700|Muli:300,400,700)
 
 $primary: #D72A52
 $secondary: #268AFF
 $success: #4caf50
 $danger: #b83636
+$purple: #721C3E
 $family-sans-serif: Muli, sans-serif
+$family-secondary: Fira Sans, sans-serif
 $black-ter: #22243B
 $black-bis: #0D0F2B
-$radius-medium: 4px
-$radius-large: 8px
+$radius-medium: 0.25rem
+$radius-large: 1rem
+$body-background-color: $black-bis
+
+$size-1: 48px
+$size-2: 32px
+$size-3: 23px
+$size-4: 18px
+$size-5: 16px
+$size-6: 14px
+$size-7: 12px
+
+$body-size: $size-6
+
+@import mixins
 
 @import ~bulma/bulma
 
-body, html
-  min-height: 100%
-  background: $black-bis
+/**
+ * Typography.
+ */
 
 .title
-  font-family: Fira Sans, sans-serif
-  font-weight: bold
+  font-family: $family-secondary
 
-.subtitle
-  opacity: 0.85
+/**
+ * Banner.
+ */
 
-.nav
-  display: flex
+.banner
+  background-size: cover
+  position: relative
 
-  .nav-spacer
-    flex: 1
+  &.is-2by1
+    padding-bottom: 50%
 
-  .nav-menu
-    .nav-item
-      display: flex
-      align-items: center
-      justify-content: center
-      height: 4rem
-      padding: 1.2rem
+  .banner-head
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 1rem
+    position: absolute
+    width: 100%
 
-      img
-        max-height: 100%
-        width: auto
-        max-width: auto
-
-    .nav-burger
-      border-radius: 1.5px
-      border-top: 3px solid white
-      display: block
-      height: 16px
-      position: relative
-      width: 22px
-
-      &:before, &:after
-        background: white
-        border-radius: 1.5px
-        content: ''
-        height: 3px
-        position: absolute
-        right: 0
-        top: 50%
-        width: 70%
-
-      &:after
-        top: calc(100% + 2px)
-        width: 80%
+/**
+ * Step.
+ */
 
 .step
+  +block
   border-radius: $radius-medium
   background: $black-ter
-  height: 100%
+  overflow: hidden
+  padding: 0.5rem 0 0
 
-  &.is-faded
+  &.is-locked
     opacity: 0.6
+    pointer-events: none
 
-  .title
-    color: white
+  .step-head
+    padding: 1rem
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1)
 
-  .subtitle
-    color: $white-ter
+  .step-body
+    padding: 1rem
+
+    .step-count
+      color: $primary
+      font-weight: $weight-bold
+      font-family: $family-secondary
+
+/**
+ * Buttons.
+ */
 
 .button
-  border-radius: $radius-large
+  border-radius: $radius-medium
+  box-shadow: none !important
+  outline: none
 
   &.is-secondary
     background: $secondary
@@ -91,28 +100,165 @@ body, html
     border-color: $grey
     color: $white-ter
 
-  &.is-transparent
-    background: transparent
-    border-color: transparent
-    color: $grey-light
+  &.is-success
+    background: $success
+    border-color: $success
+    color: $white-ter
+
+  &.is-static
+    background: $white-ter
+    border-color: $white-ter
+    color: $text
+
+  &.is-inactive
+    pointer-events: none
+
+  &.is-large
+    height: 2.75em
+
+/**
+ * Modifiers.
+ */
+
+.section
+  &.is-pulled-up
+    margin-top: -3rem
+    padding-top: 0
+
+.is-flex-aligned
+  display: flex !important
+  align-items: center !important
 
 .has-text-secondary
   color: $secondary !important
 
-.hero.temp-cubana-bg
-  background-image: url(/img/smoothie.png)
-  background-size: cover
+/**
+ * Action.
+ */
 
-
-#qr-container
+.badge
+  align-items: center
+  background: $black-ter
+  border-radius: 1000rem
+  border: none
+  color: $white
   display: flex
+  height: 2.25em
   justify-content: center
+  min-width: 2.25em
+  outline: none
 
-  #qr
-    border: 10px solid white
+  &.is-faded
+    opacity: 0.8
+
+  &.is-padded
+    padding: 0 1rem
+
+/**
+ * Post.
+ */
+
+.post
+  +block
+  border-radius: $radius-medium
+  position: relative
+  overflow: hidden
+
+  .post-author
+    background: $black-ter
+    border-radius: $radius-medium
+    color: white
+    opacity: 0.95
+    padding: 0.25rem 1rem
+    position: absolute
+    font-size: $size-7
+    right: 0.75rem
+    top: 0.75rem
+
+  .post-comment
+    bottom: 0.75rem
+    right: 0.75rem
+    padding: 0.75rem 1rem
+    text-align-last: right
+    font-size: $size-7
+    color: white
+    left: 0.75rem
+    background: $black-ter
     border-radius: $radius-large
-    margin: 0 auto
+    border-bottom-right-radius: $radius-medium
+    opacity: 0.95
+    position: absolute
 
-.line
-  height: 1px
-  background: white
+/**
+ * Reward.
+ */
+
+.reward
+  background: $purple
+  color: $white
+
+  .reward-head
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+    padding: 1rem
+
+  .reward-body
+    padding: 1rem
+    border-bottom: 2px dashed $black-bis
+
+  .reward-foot
+    animation: ColorFade 5s linear infinite
+    align-items: center
+    display: flex
+    justify-content: space-between
+    padding: 1rem
+
+/**
+ * Animations.
+ */
+
++keyframes(ColorFade)
+  0%
+    background-color: $primary
+  50%
+    background-color: $secondary
+  100%
+    background-color: $primary
+
+/**
+ * Inputs and groups.
+ */
+
+input.input
+  border: none
+  box-shadow: none !important
+  font-size: $size-7
+  height: 2.625em
+  outline: none
+
+  &.is-small
+    height: 2.25em
+    font-size: $size-7
+
+  &.is-medium
+    height: 3em
+    font-size: $size-7
+
+  &.is-large
+    height: 4.125em
+    font-size: $size-7
+
+.control
+  display: flex
+  overflow: hidden
+
+  > .input, > .addon
+    border-radius: 0
+
+    &:first-child
+      border-bottom-left-radius: $radius-medium
+      border-top-left-radius: $radius-medium
+
+    &:last-child
+      border-bottom-right-radius: $radius-medium
+      border-top-right-radius: $radius-medium
+

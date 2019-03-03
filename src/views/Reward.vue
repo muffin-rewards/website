@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="banner is-2by1" style="background-image: url('/img/chelsea-creperie.png')">
+    <header class="banner is-2by1" :style="{ 'background-image': `url(${reward.image})` }">
       <div class="banner-head">
         <button class="badge is-faded">
           <i class="fas fa-fw fa-arrow-left"></i>
@@ -8,7 +8,7 @@
         <button class="badge is-padded">
           <i class="fas fa-map-marker-alt"></i>
           &nbsp;
-          Chelsea Creperie
+          {{ reward.promoterName }}
         </button>
       </div>
     </header>
@@ -17,10 +17,13 @@
       <div class="container">
         <div class="step">
           <div class="step-head">
-            <p class="title is-3 has-text-white">GET A FREE PANCAKE</p>
+            <p class="title is-3 has-text-white is-uppercase">
+              {{ reward.name }}
+            </p>
 
             <p class="subtitle is-7 has-text-grey-light">
               Show Details
+              <!-- TODO: Details -->
               <i class="fas fa-angle-down"></i>
             </p>
           </div>
@@ -33,12 +36,12 @@
 
             <p class="has-text-grey-light">
               <i class="fas fa-fw fa-map-marker-alt has-text-secondary"></i>
-              Post a photo at Chelsea Creperie
+              Post a photo at {{ reward.promoterName }}
             </p>
 
             <p class="has-text-grey-light">
               <i class="fas fa-fw fa-at has-text-secondary"></i>
-              Tag <span class="has-text-white has-text-weight-bold">@ChelseaCreperie</span> in the caption
+              Tag <span class="has-text-white has-text-weight-bold">@{{ reward.promoter }}</span> in the caption
             </p>
 
             <div class="content"></div>
@@ -50,6 +53,12 @@
             </div>
 
             <button class="button is-large is-secondary is-fullwidth is-loading"></button>
+
+            <button class="button is-large is-danger is-fullwidth is-inactive has-text-weight-bold">
+              <i class="fas fa-exclamation-circle"></i>
+              &nbsp;
+              Try Again
+            </button>
 
             <button class="button is-large is-success is-fullwidth is-inactive has-text-weight-bold">
               <i class="far fa-check-circle"></i>
@@ -63,8 +72,8 @@
         <div class="step">
           <div class="step-body">
             <p class="step-count">STEP 2</p>
-            <p class="title is-3 has-text-white">Allow Chelsea Creperie to Fetaure Your Photo</p>
-            <p class="subtitle is-6 has-text-grey-light">Chelsea Creperie might like to feature your photo. Tap below to give them permission.</p>
+            <p class="title is-3 has-text-white">Allow {{ reward.promoterName }} to Fetaure Your Photo</p>
+            <p class="subtitle is-6 has-text-grey-light">{{ reward.promoterName }} might like to feature your photo. Tap below to give them permission.</p>
 
             <figure class="image">
               <img src="@/assets/images/photo-placeholder.png" alt="Photo Placeholder">
@@ -109,32 +118,32 @@
 
           <div class="step-foot">
             <figure class="image is-3by2">
-              <img src="@/assets/images/reward-placeholder.png" alt="Reward Placeholder">
+              <img src="@/assets/images/voucher-placeholder.png" alt="Voucher Placeholder">
             </figure>
 
-            <div class="reward">
-              <div class="reward-head">
+            <div class="voucher">
+              <div class="voucher-head">
                 <p class="title is-4 has-text-white">
                   <i class="fas fa-award"></i>
                   &nbsp;
-                  Free Pancake
+                  {{ reward.name }}
                 </p>
               </div>
 
-              <div class="reward-body">
+              <div class="voucher-body">
                 <div class="content">
                   <p class="has-text-weight-bold">Terms and conditions:</p>
 
                   <ul>
-                    <li>Valid on pancakes on the summer menu</li>
-                    <li>Only valid in Chelsea Creperie</li>
-                    <li>Single use only</li>
-                    <li>Expires 2 March 2019</li>
+                    <li
+                      v-for="(item, key) in reward.termsAndConditions"
+                      :key="key"
+                    >{{ item }}</li>
                   </ul>
                 </div>
               </div>
 
-              <div class="reward-foot">
+              <div class="voucher-foot">
                 <div></div>
                 <p class="is-flex-aligned">
                   jonnymatthews_
@@ -151,16 +160,24 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
 
-  computed: mapState({
-    reward: s => s.rewards.currentPromoter[0] || {}
-  }),
+  computed: {
+    reward () {
+      return this.$store.state.rewards.list.find(r => r.slug === this.$route.params.slug)
+    }
+  },
+
+  // computed: mapState({
+  //   reward: s => s.rewards.current
+  // }),
 
   mounted () {
-    this.$store.dispatch('rewards/loadReward', 'cubana')
+    this.$store.dispatch('rewards/list')
+    // TODO: Change for rest apis.
+    // this.$store.dispatch('rewards/show', this.$route.params.slug)
   }
 
 }

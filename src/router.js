@@ -13,8 +13,8 @@ export default new Router({
       component: () => import('./views/Home')
     },
     {
-      path: '/:promoter',
-      name: 'Reward',
+      path: '/:slug',
+      name: 'reward',
       component: () => import('./views/Reward')
     }
   ]

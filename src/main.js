@@ -12,3 +12,7 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+// TODO: Reset scroll.
+// TODO: Controllers and middleware
+// TODO: TS

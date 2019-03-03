@@ -190,22 +190,22 @@ $body-size: $size-6
     position: absolute
 
 /**
- * Reward.
+ * Voucher.
  */
 
-.reward
+.voucher
   background: $purple
   color: $white
 
-  .reward-head
+  .voucher-head
     border-bottom: 1px solid rgba(255, 255, 255, 0.1)
     padding: 1rem
 
-  .reward-body
+  .voucher-body
     padding: 1rem
     border-bottom: 2px dashed $black-bis
 
-  .reward-foot
+  .voucher-foot
     animation: ColorFade 5s linear infinite
     align-items: center
     display: flex
@@ -261,4 +261,48 @@ input.input
     &:last-child
       border-bottom-right-radius: $radius-medium
       border-top-right-radius: $radius-medium
+
+/**
+ * Nav.
+ */
+
+.nav
+  display: flex
+
+  .nav-spacer
+    flex: 1
+
+  .nav-menu
+    .nav-item
+      display: flex
+      align-items: center
+      justify-content: center
+      height: 6rem
+      padding: 1.5rem
+
+      img
+        max-height: 100%
+        width: auto
+        max-width: auto
+
+/**
+ * Reward element.
+ */
+
+.reward
+  +block
+  display: block
+  border-radius: $radius-medium
+  overflow: hidden
+  position: relative
+
+  .reward-title
+    background: $black-ter
+    border-radius: $radius-medium
+    bottom: 0.75rem
+    color: white
+    font-size: $size-5
+    left: 0.75rem
+    padding: 0.25rem 1rem
+    position: absolute
 

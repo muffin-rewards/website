@@ -1,28 +1,53 @@
 <template>
   <div>
-    <nav class="nav" role="navigation" aria-label="main navigation">
-      <div class="nav-menu">
-        <router-link class="nav-item" :to="{ name: 'home' }">
-          <img src="@/assets/images/muffin-logo.png" alt="Muffin">
-        </router-link>
-      </div>
-      <div class="nav-spacer"></div>
-      <div class="nav-menu">
-        <div class="nav-item has-text-primary">
-          <span class="nav-burger"></span>
+    <header>
+      <nav class="nav" role="navigation" aria-label="main navigation">
+        <div class="nav-menu">
+          <router-link class="nav-item" :to="{ name: 'home' }">
+            <img src="@/assets/images/muffin-logo.png" alt="Muffin">
+          </router-link>
         </div>
+        <div class="nav-spacer"></div>
+      </nav>
+    </header>
+
+    <main class="section">
+      <div class="container">
+
+        <router-link
+          class="reward"
+          v-for="reward in rewards"
+          :key="reward.slug"
+          :to="{ name: 'reward', params: { slug: reward.slug } }"
+        >
+          <figure class="image is-2by1">
+            <img :src="reward.image" :alt="reward.promoterName">
+          </figure>
+
+          <div class="reward-title">
+            {{ reward.name }}
+            <span class="has-text-primary has-text-weight-bold">@ </span>
+            <span class="has-text-weight-bold">{{ reward.promoterName }}</span>
+          </div>
+        </router-link>
+
       </div>
-    </nav>
-
-    <div class="line"></div>
-
-    <router-link to="/cubana">
-      <img src="@/assets/images/cubana.png" alt="Cubana">
-    </router-link>
-
-    <div class="line"></div>
-    <img src="@/assets/images/dominos.png" alt="Dominos">
-    <div class="line"></div>
-    <img src="@/assets/images/chilangos.png" alt="Chilangos">
+    </main>
   </div>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+
+  computed: mapState({
+    rewards: s => s.rewards.list
+  }),
+
+  mounted () {
+    this.$store.dispatch('rewards/list')
+  }
+
+}
+</script>

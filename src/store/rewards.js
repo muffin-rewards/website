@@ -5,21 +5,32 @@ export default {
   namespaced: true,
 
   state: {
-    currentReward: {}
+    list: [],
+    current: {}
   },
 
   mutations: {
-    updateCurrentReward (state, data) {
-      state.currentReward = data
+    updateList (state, data) {
+      state.list = data
+    },
+
+    updateCurrent (state, data) {
+      state.current = data
     }
   },
 
   actions: {
 
-    async loadReward ({ commit }, slug) {
+    async list ({ commit }) {
+      return rewards()
+        .body()
+        .then(rewards => commit('updateList', rewards))
+    },
+
+    async show ({ commit }, slug) {
       return rewards()
         .body(slug)
-        .then(reward => commit('updateCurrentReward', reward))
+        .then(reward => commit('updateCurrent', reward))
     }
 
   }

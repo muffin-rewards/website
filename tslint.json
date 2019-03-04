@@ -1,0 +1,38 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "arrow-parens": [2, "as-needed", { "requireForBlockBody": true }],
+    "interface-name": [true, "never-prefix"],
+    "jsdoc-format": [true, "check-multiline-start"],
+    "max-classes-per-file": false,
+    "max-line-length": { "options": [120] },
+    "member-ordering": [true, "instance-sandwich"],
+    "no-console": false,
+    "no-string-literal": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "quotemark": [true, "single"],
+    "semicolon": [true, "never"],
+    "space-before-function-paren": [true, "always"],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "space",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
+    ]
+  }
+}

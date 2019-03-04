@@ -159,26 +159,19 @@
   </div>
 </template>
 
-<script>
-// import { mapState } from 'vuex'
+<script lang="ts">
+import { Getter } from 'vuex-class'
+import { Reward } from '@/types/models/Reward'
+import { Component, Vue } from 'vue-property-decorator'
 
-export default {
+@Component
+export default class extends Vue {
 
-  computed: {
-    reward () {
-      return this.$store.state.rewards.list.find(r => r.slug === this.$route.params.slug)
-    }
-  },
-
-  // computed: mapState({
-  //   reward: s => s.rewards.current
-  // }),
-
-  mounted () {
-    this.$store.dispatch('rewards/list')
-    // TODO: Change for rest apis.
-    // this.$store.dispatch('rewards/show', this.$route.params.slug)
-  }
+  /**
+   * The current reward Vuex getter.
+   */
+  @Getter('currentReward')
+  public reward: Reward
 
 }
 </script>

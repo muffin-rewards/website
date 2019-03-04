@@ -1,4 +1,4 @@
-const swUrl = `${process.env.BASE_URL}service-worker.js`
+const swUrl: string = `${process.env.BASE_URL}service-worker.js`
 
 console.log('[SW] registering service worker at', swUrl)
 

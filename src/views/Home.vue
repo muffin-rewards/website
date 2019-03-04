@@ -36,18 +36,19 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
+<script lang="ts">
+import { Getter } from 'vuex-class'
+import { Reward } from '@/types/models/Reward'
+import { Component, Vue } from 'vue-property-decorator'
 
-export default {
+@Component
+export default class extends Vue {
 
-  computed: mapState({
-    rewards: s => s.rewards.list
-  }),
-
-  mounted () {
-    this.$store.dispatch('rewards/list')
-  }
+  /**
+   * The reward list Vuex getter.
+   */
+  @Getter('rewardList')
+  public rewards: Reward[]
 
 }
 </script>

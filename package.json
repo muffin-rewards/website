@@ -9,8 +9,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@bausano/data-structures": "^1.0.1",
-    "awi": "0.0.6",
+    "@bausano/data-structures": "^1.0.3",
+    "awi": "0.0.9",
     "bulma": "^0.7.4",
     "register-service-worker": "^1.5.2",
     "vue": "^2.6.6",

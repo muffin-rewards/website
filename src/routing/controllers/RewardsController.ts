@@ -10,7 +10,7 @@ export class RewardsController extends Controller {
     // TODO: Remove eventually.
     await this.$store.dispatch('listRewards')
 
-    await this.$store.dispatch('loadCurrentReward', to.params.slug)
+    return this.$store.dispatch('loadCurrentReward', to.params.slug)
   }
 
 }

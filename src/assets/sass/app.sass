@@ -59,7 +59,6 @@ $body-size: $size-6
  */
 
 .step
-  +block
   border-radius: $radius-medium
   background: $black-ter
   overflow: hidden
@@ -76,11 +75,6 @@ $body-size: $size-6
   .step-body
     padding: 1rem
 
-    .step-count
-      color: $primary
-      font-weight: $weight-bold
-      font-family: $family-secondary
-
 /**
  * Buttons.
  */
@@ -93,11 +87,6 @@ $body-size: $size-6
   &.is-secondary
     background: $secondary
     border-color: $secondary
-    color: $white-ter
-
-  &.is-grey
-    background: $grey
-    border-color: $grey
     color: $white-ter
 
   &.is-success
@@ -121,9 +110,10 @@ $body-size: $size-6
  */
 
 .section
-  &.is-pulled-up
-    margin-top: -3rem
-    padding-top: 0
+  &.is-pulled-up-touch
+    +touch
+      margin-top: -3rem
+      padding-top: 0
 
 .is-flex-aligned
   display: flex !important
@@ -131,6 +121,9 @@ $body-size: $size-6
 
 .has-text-secondary
   color: $secondary !important
+
+.has-family-secondary
+  font-family: $family-secondary !important
 
 /**
  * Action.
@@ -141,10 +134,10 @@ $body-size: $size-6
   background: $black-ter
   border-radius: 1000rem
   border: none
-  color: $white
   display: flex
   height: 2.25em
   justify-content: center
+  line-height: 1
   min-width: 2.25em
   outline: none
 
@@ -152,7 +145,7 @@ $body-size: $size-6
     opacity: 0.8
 
   &.is-padded
-    padding: 0 1rem
+    padding: 0 0.75rem
 
 /**
  * Post.
@@ -251,7 +244,7 @@ input.input
   display: flex
   overflow: hidden
 
-  > .input, > .addon
+  > *
     border-radius: 0
 
     &:first-child

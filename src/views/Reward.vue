@@ -2,156 +2,231 @@
   <div>
     <header class="banner is-2by1" :style="{ 'background-image': `url(${reward.image})` }">
       <div class="banner-head">
-        <button class="badge is-faded">
-          <i class="fas fa-fw fa-arrow-left"></i>
-        </button>
-        <button class="badge is-padded">
-          <i class="fas fa-map-marker-alt"></i>
+        <router-link :to="{ name: 'home' }" class="badge is-faded">
+          <Out white><Icon small>arrow-left</Icon></Out>
+        </router-link>
+
+        <span class="badge is-padded">
+          <Out white><Icon small>map-marker-alt</Icon></Out>
           &nbsp;
-          {{ reward.promoterName }}
-        </button>
+          <Out white>{{ reward.promoterName }}</Out>
+        </span>
       </div>
     </header>
 
-    <section class="section is-pulled-up">
+    <section class="section is-pulled-up-touch">
       <div class="container">
-        <div class="step">
-          <div class="step-head">
-            <p class="title is-3 has-text-white is-uppercase">
-              {{ reward.name }}
-            </p>
+        <div class="columns">
+          <div class="column">
 
-            <p class="subtitle is-7 has-text-grey-light">
-              Show Details
-              <!-- TODO: Details -->
-              <i class="fas fa-angle-down"></i>
-            </p>
-          </div>
 
-          <div class="step-body">
-            <p class="step-count">STEP 1</p>
+            <!--
+              -- Step 1
+            -->
 
-            <p class="title is-3 has-text-white">Make in Instagram Post</p>
-            <p class="subtitle is-6 has-text-grey-light">To qualify for the reward:</p>
+            <Step>
+              <template #step>1</template>
+              <template #title>Make in Instagram Post</template>
+              <template #subtitle>To qualify for the reward:</template>
 
-            <p class="has-text-grey-light">
-              <i class="fas fa-fw fa-map-marker-alt has-text-secondary"></i>
-              Post a photo at {{ reward.promoterName }}
-            </p>
+              <template #head>
+                <h1 class="title is-3">
+                  <Out white uppercase>{{ reward.name }}</Out>
+                </h1>
 
-            <p class="has-text-grey-light">
-              <i class="fas fa-fw fa-at has-text-secondary"></i>
-              Tag <span class="has-text-white has-text-weight-bold">@{{ reward.promoter }}</span> in the caption
-            </p>
-
-            <div class="content"></div>
-
-            <div class="control">
-              <button class="addon button is-large is-static has-text-primary has-text-weight-bold">@</button>
-              <input type="text" class="input is-large" placeholder="handle/username">
-              <button class="addon button is-large is-secondary has-text-weight-bold">Find Post</button>
-            </div>
-
-            <button class="button is-large is-secondary is-fullwidth is-loading"></button>
-
-            <button class="button is-large is-danger is-fullwidth is-inactive has-text-weight-bold">
-              <i class="fas fa-exclamation-circle"></i>
-              &nbsp;
-              Try Again
-            </button>
-
-            <button class="button is-large is-success is-fullwidth is-inactive has-text-weight-bold">
-              <i class="far fa-check-circle"></i>
-              &nbsp;
-              Post Found
-            </button>
-          </div>
-        </div>
-
-        <!-- <div class="step is-locked"> -->
-        <div class="step">
-          <div class="step-body">
-            <p class="step-count">STEP 2</p>
-            <p class="title is-3 has-text-white">Allow {{ reward.promoterName }} to Fetaure Your Photo</p>
-            <p class="subtitle is-6 has-text-grey-light">{{ reward.promoterName }} might like to feature your photo. Tap below to give them permission.</p>
-
-            <figure class="image">
-              <img src="@/assets/images/photo-placeholder.png" alt="Photo Placeholder">
-            </figure>
-
-            <div class="post">
-              <figure class="image is-1by1">
-                <img src="@/assets/images/temp-lattes.png" alt="Reward Placeholder">
-              </figure>
-
-              <div class="post-author is-flex-aligned">
-                jonnymatthews_
-                &nbsp;
-                <i class="fab fa-instagram"></i>
-              </div>
-
-              <div class="post-comment is-flex-aligned">
-                One of the best latte’s I’ve ever had ☕️ need to go back 😫 @chelseacreperie ❤️
-              </div>
-            </div>
-
-            <button class="button is-secondary is-large is-fullwidth has-text-weight-bold">
-              <i class="fas fa-handshake"></i>
-              &nbsp;
-              Yes, sure!
-            </button>
-
-            <button class="button is-secondary is-large is-fullwidth is-loading"></button>
-
-            <button class="button is-success is-large is-fullwidth is-inactive has-text-weight-bold">
-              Thanks! We'll let them know
-            </button>
-          </div>
-        </div>
-
-        <div class="step">
-          <div class="step-body">
-            <p class="step-count">STEP 3</p>
-            <p class="title is-3 has-text-white">Here's Your Reward</p>
-            <p class="subtitle is-6 has-text-grey-light">Show the voucher below to your server to claim your reward.</p>
-          </div>
-
-          <div class="step-foot">
-            <figure class="image is-3by2">
-              <img src="@/assets/images/voucher-placeholder.png" alt="Voucher Placeholder">
-            </figure>
-
-            <div class="voucher">
-              <div class="voucher-head">
-                <p class="title is-4 has-text-white">
-                  <i class="fas fa-award"></i>
-                  &nbsp;
-                  {{ reward.name }}
+                <p class="subtitle is-7">
+                  <!-- TODO: Details -->
+                  <Out grey-light>Show Details <Icon small>angle-down</Icon></Out>
                 </p>
-              </div>
+              </template>
 
-              <div class="voucher-body">
-                <div class="content">
-                  <p class="has-text-weight-bold">Terms and conditions:</p>
+              <template #body>
+                <p>
+                  <Out secondary><Icon>map-marker-alt</Icon></Out>
+                  <Out grey-light>Post a photo at {{ reward.promoterName }}</Out>
+                </p>
 
-                  <ul>
-                    <li
-                      v-for="(item, key) in reward.termsAndConditions"
-                      :key="key"
-                    >{{ item }}</li>
-                  </ul>
+                <p>
+                  <Out secondary><Icon>at</Icon></Out>
+                  <Out grey-light>Tag <Out white bold>@{{ reward.promoter }}</Out> in the caption</Out>
+                </p>
+
+                <div class="content"></div>
+
+                <Stateful :trigger="findPost">
+                  <template #initial="{ fire, data }">
+                    <form class="control" @submit.prevent="fire">
+                      <Action static large>
+                        <Out primary bold>@</Out>
+                      </Action>
+
+                      <input
+                        type="text"
+                        class="input is-large"
+                        placeholder="handle/username"
+                        autocorrect="off"
+                        v-model="data.handle"
+                      >
+
+                      <Action secondary large>
+                        <Out bold>Find Post</Out>
+                      </Action>
+                    </form>
+                  </template>
+
+                  <template #fired>
+                    <Action secondary large loading block></Action>
+                  </template>
+
+                  <template #failed="{ fire, data }">
+                    <form class="control" @submit.prevent="fire">
+                      <Action static large>
+                        <Out primary bold>@</Out>
+                      </Action>
+
+                      <input
+                        type="text"
+                        class="input is-large"
+                        placeholder="handle/username"
+                        autocorrect="off"
+                        v-model="data.handle"
+                      >
+
+                      <Action danger large>
+                        <Out bold>Try Again</Out>
+                      </Action>
+                    </form>
+                  </template>
+
+                  <template #succeeded>
+                    <Action success large block inactive>
+                      <Out bold><Icon>check-circle</Icon></Out>
+                      &nbsp;&nbsp;
+                      <Out bold>Post Found</Out>
+                    </Action>
+                  </template>
+                </Stateful>
+              </template>
+            </Step>
+
+          </div>
+          <div class="column">
+
+            <!--
+              -- Step 2
+            -->
+
+            <Step :locked="consentLocked">
+              <template #step>2</template>
+              <template #title>Allow {{ reward.promoterName }} to Fetaure Your Photo</template>
+              <template #subtitle>{{ reward.promoterName }} might like to feature your photo. Tap below to give them permission.</template>
+
+              <template #body="{ locked }">
+                <figure class="image" v-if="locked">
+                  <img src="@/assets/images/photo-placeholder.png" alt="Photo Placeholder">
+                </figure>
+
+                <div v-if="!locked && post.isSome()">
+
+                  <!-- Extract a post component. -->
+                  <div class="post">
+                    <figure class="image is-1by1">
+                      <img :src="post.unwrap().url" :alt="post.unwrap().caption">
+                    </figure>
+
+                    <div class="post-author is-flex-aligned">
+                      {{ post.unwrap().user }}
+                      &nbsp;
+                      <i class="fab fa-instagram"></i>
+                    </div>
+
+                    <div class="post-comment is-flex-aligned">
+                      {{ post.unwrap().caption }}
+                    </div>
+                  </div>
+
+                  <Stateful :trigger="consent">
+                    <template #initial="{ fire }">
+                      <Action secondary large block @click="fire">
+                        <Out bold><Icon>handshake</Icon></Out>
+                        &nbsp;&nbsp;
+                        <Out bold>Yes, sure!</Out>
+                      </Action>
+                    </template>
+
+                    <template #fired>
+                      <Action secondary large loading block></Action>
+                    </template>
+
+                    <template #failed="{ fire }">
+                      <Action danger large block @click="fire">
+                        <Out bold><Icon>exclamation-circle</Icon></Out>
+                        &nbsp;&nbsp;
+                        <Out bold>Try again</Out>
+                      </Action>
+                    </template>
+
+                    <template #succeeded>
+                      <Action success large inactive block>
+                        <Out bold>Thanks! We'll let them know</Out>
+                      </Action>
+                    </template>
+                  </Stateful>
                 </div>
-              </div>
+              </template>
+            </Step>
 
-              <div class="voucher-foot">
-                <div></div>
-                <p class="is-flex-aligned">
-                  jonnymatthews_
-                  &nbsp;
-                  <i class="fab fa-instagram"></i>
-                </p>
-              </div>
-            </div>
+          </div>
+          <div class="column">
+
+            <!--
+              -- Step 3
+            -->
+
+            <Step :locked="voucherLocked">
+              <template #step>3</template>
+              <template #title>Here's Your Reward</template>
+              <template #subtitle>Show the voucher below to your server to claim your reward.</template>
+
+              <template #foot="{ locked }">
+                <figure class="image is-3by2" v-if="locked">
+                  <img src="@/assets/images/voucher-placeholder.png" alt="Voucher Placeholder">
+                </figure>
+
+                <div class="voucher" v-else>
+                  <div class="voucher-head">
+                    <p class="title is-4 has-text-white">
+                      <i class="fas fa-award"></i>
+                      &nbsp;
+                      {{ reward.name }}
+                    </p>
+                  </div>
+
+                  <div class="voucher-body">
+                    <div class="content">
+                      <p class="has-text-weight-bold">Terms and conditions:</p>
+
+                      <ul>
+                        <li
+                          v-for="(item, key) in reward.termsAndConditions"
+                          :key="key"
+                        >{{ item }}</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="voucher-foot">
+                    <div></div>
+                    <p class="is-flex-aligned">
+                      jonnymatthews_
+                      &nbsp;
+                      <i class="fab fa-instagram"></i>
+                    </p>
+                  </div>
+                </div>
+              </template>
+            </Step>
+
           </div>
         </div>
       </div>
@@ -160,11 +235,19 @@
 </template>
 
 <script lang="ts">
+import Step from '@/components/reward/Step.vue'
+import Stateful from '@/components/Stateful.vue'
+
+import { mentions } from '@/awi'
 import { Getter } from 'vuex-class'
+import { Optional, Some, None, ResponseType } from 'awi'
+import { Post } from '@/types/models/Post'
 import { Reward } from '@/types/models/Reward'
 import { Component, Vue } from 'vue-property-decorator'
 
-@Component
+@Component({
+  components: { Stateful, Step },
+})
 export default class extends Vue {
 
   /**
@@ -172,6 +255,42 @@ export default class extends Vue {
    */
   @Getter('currentReward')
   public reward: Reward
+
+  /**
+   * The post to be used for the reward redemption.
+   */
+  public post: Optional<Post> = new None()
+
+  /**
+   * Whether the consent step is locked.
+   */
+  public consentLocked: boolean = true
+
+  /**
+   * Whether the voucher step is locked.
+   */
+  public voucherLocked: boolean = true
+
+  /**
+   * Functionality to find the post.
+   */
+  public async findPost (data: { handle: string }) : Promise<void> {
+    await mentions()
+      .body<Post>(`muffinrewards/find/${data.handle.replace('@', '')}`)
+      .then(post => this.post = new Some(post))
+      .then(() => this.consentLocked = false)
+  }
+
+  /**
+   * Functionality to consent rights.
+   */
+  public async consent () : Promise<void> {
+    await mentions()
+      .post(`muffinrewards/redeem/${this.post.unwrap().user}`)
+      // TODO: Remove.
+      .catch(() => undefined)
+      .then(() => this.voucherLocked = false)
+  }
 
 }
 </script>

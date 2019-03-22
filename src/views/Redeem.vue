@@ -137,7 +137,8 @@ export default {
       post: 'waiting',
       redeem: 'waiting'
     },
-    qrShown: false
+    qrShown: false,
+    interval: null
   }),
 
   computed: mapState({
@@ -152,32 +153,23 @@ export default {
     connectInstagram () {
       this.stages.auth = 'pending'
 
-      const authWindow = window.open(
-        `https://api.instagram.com/oauth/authorize/?client_id=4b48b64761ae4d048d6ab2c85f56a654&redirect_uri=${location.origin}/auth/instagram&response_type=token`,
+      window.open(
+        `https://api.instagram.com/oauth/authorize/?client_id=9a3d541ecf8d4fcfba7a1b6af94ecfe3&redirect_uri=${location.origin}/auth/instagram&response_type=token`,
         'Connect Instagram',
         'width=500,height=500'
       )
 
-      authWindow.addEventListener('message', this.authListener)
+      this.interval = setInterval(() => this.authListener(), 500)
     },
 
-    authListener (e) {
-      if (e.origin !== location.origin) {
+    authListener () {
+      if (!localStorage.token) {
         return
       }
 
-      if (e.data.action === 'auth.instagram.success') {
-        localStorage.token = e.data.token
-
-        this.stages.auth = 'success'
-        this.stages.post = 'active'
-      }
-
-      if (e.data.action === 'auth.instagram.failure') {
-        localStorage.token = e.data.token
-
-        this.stages.auth = 'failure'
-      }
+      this.stages.auth = 'success'
+      this.stages.post = 'active'
+      clearInterval(this.interval)
     },
 
     async findPost () {

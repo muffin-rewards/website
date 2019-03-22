@@ -17,10 +17,7 @@ export default {
       return close()
     }
 
-    postMessage({
-      action: 'auth.instagram.success',
-      token: (this.$route.hash || '').replace('#access_token=', '')
-    }, location.origin)
+    localStorage.token = (this.$route.hash || '').replace('#access_token=', '')
 
     return close()
   }

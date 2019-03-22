@@ -152,6 +152,7 @@ export default {
   methods: {
     connectInstagram () {
       this.stages.auth = 'pending'
+      localStorage.token = undefined
 
       window.open(
         `https://api.instagram.com/oauth/authorize/?client_id=9a3d541ecf8d4fcfba7a1b6af94ecfe3&redirect_uri=${location.origin}/auth/instagram&response_type=token`,

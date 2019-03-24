@@ -13,6 +13,11 @@ export default new Router({
       component: () => import('./views/Home')
     },
     {
+      path: '/privacy',
+      name: 'privacy',
+      component: () => import('./views/Privacy')
+    },
+    {
       path: '/auth/:provider',
       name: 'auth.callback',
       component: () => import('./views/auth/Callback')

@@ -59,7 +59,11 @@
                   </template>
 
                   <template #fired>
-                    <Action secondary large loading block></Action>
+                    <Action secondary large fullwidth>
+                      <Icon spins>spinner</Icon>
+                      &nbsp;&nbsp;
+                      <Out bold>Connecting Account</Out>
+                    </Action>
                   </template>
 
                   <template #failed="{ fire, data }">

@@ -105,7 +105,7 @@
 
             <Step :locked="consentLocked">
               <template #step>2</template>
-              <template #title>Make in Instagram Post</template>
+              <template #title>Make an Instagram Post</template>
               <template #subtitle>To qualify for the reward:</template>
 
               <template #body="{ locked }">

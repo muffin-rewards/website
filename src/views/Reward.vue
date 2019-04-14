@@ -273,10 +273,23 @@ export default class extends Vue {
    * Functionality to find the post.
    */
   public async findPost (data: { handle: string }) : Promise<void> {
-    await mentions()
-      .body<Post>(`muffinrewards/find/${data.handle.replace('@', '')}`)
-      .then(post => this.post = new Some(post))
-      .then(() => this.consentLocked = false)
+    localStorage.setItem('token', undefined)
+
+    window.open(
+      `https://api.instagram.com/oauth/authorize/?client_id=9a3d541ecf8d4fcfba7a1b6af94ecfe3&redirect_uri=${location.origin}/auth/instagram&response_type=token`,
+      'Connect Instagram',
+      'width=500,height=500',
+    )
+
+    return new Promise((resolve) => {
+      const interval: number = setInterval(() => {
+        if (!localStorage.getItem('token')) {
+          return
+        }
+
+        resolve(clearInterval(interval))
+      }, 500)
+    })
   }
 
   /**

@@ -1,6 +1,6 @@
 <template>
   <span class="icon" :class="sizeClass">
-    <i :class="[iconName, typeClass]"></i>
+    <i :class="[iconName, typeClass].concat(extraClasses)"></i>
   </span>
 </template>
 
@@ -17,6 +17,8 @@ export default class extends Vue {
   @Prop({ type: Boolean }) public small: boolean
   @Prop({ type: Boolean }) public medium: boolean
   @Prop({ type: Boolean }) public large: boolean
+
+  @Prop({ type: Boolean }) public spins: boolean
 
   /** The desired type class. */
   public get typeClass () : string {
@@ -35,6 +37,13 @@ export default class extends Vue {
       this.medium ? 'is-medium' :
       this.large ? 'is-large' : ''
     )
+  }
+
+  /** Other useful classes. */
+  public get extraClasses () : string[] {
+    return [
+      this.spins ? 'fa-spin' : '',
+    ]
   }
 
   /** The desired icon name. */

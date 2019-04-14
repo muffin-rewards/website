@@ -55,7 +55,7 @@ export default class extends Vue {
     )
   }
 
-  /** The desired button size class. */
+  /** Other useful classes. */
   public get extraClasses () : string[] {
     return [
       this.loading ? 'is-loading' : '',

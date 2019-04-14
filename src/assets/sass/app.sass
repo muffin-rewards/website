@@ -290,6 +290,15 @@ input.input
   position: relative
 
   .reward-title
+    position: absolute
+    color: white
+    font-size: $size-5
+    top: 0
+    right: 0
+    padding: 0.25rem 1rem
+    background-color: $primary
+
+  .reward-promoter
     background: $black-ter
     border-radius: $radius-medium
     bottom: 0.75rem
@@ -301,3 +310,22 @@ input.input
 
 .has-text-underlined
   text-decoration: underline
+
+.search
+  padding-top: 10px
+
+  .control
+    .input
+      max-width: 400px
+      color: $grey-light
+
+      &::placeholder
+        font-size: $size-6
+        color: $grey-light
+
+    .icon
+      height: 3.25em
+
+  +tablet
+    .control .input
+      padding-left: 3em

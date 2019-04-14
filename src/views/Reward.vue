@@ -84,7 +84,7 @@
                 </Stateful>
 
                 <p
-                  style="padding-top: 5px"
+                  style="padding-top: .25em"
                   class="has-text-grey is-size-7 has-text-centered"
                 >
                   By connecting your account, you agree to our
@@ -276,7 +276,9 @@ export default class extends Vue {
     localStorage.setItem('token', undefined)
 
     window.open(
-      `https://api.instagram.com/oauth/authorize/?client_id=9a3d541ecf8d4fcfba7a1b6af94ecfe3&redirect_uri=${location.origin}/auth/instagram&response_type=token`,
+      `https://api.instagram.com/oauth/authorize/?client_id=` +
+      `9a3d541ecf8d4fcfba7a1b6af94ecfe3&redirect_uri=${location.origin}` +
+      `/auth/instagram&response_type=token`,
       'Connect Instagram',
       'width=500,height=500',
     )

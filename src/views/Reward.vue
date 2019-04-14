@@ -86,7 +86,7 @@
                 </Stateful>
 
                 <p
-                  style="padding-top: 5px"
+                  style="padding-top: .25em"
                   class="has-text-grey is-size-7 has-text-centered"
                 >
                   By connecting your account, you agree to our

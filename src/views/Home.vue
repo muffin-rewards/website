@@ -16,8 +16,8 @@
 
         <router-link
           class="reward"
-          v-for="reward in rewards"
           :key="reward.slug"
+          v-for="reward in rewards"
           :to="{ name: 'reward', params: { slug: reward.slug } }"
         >
           <figure class="image is-2by1">

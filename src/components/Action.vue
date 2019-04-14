@@ -32,6 +32,8 @@ export default class extends Vue {
   @Prop({ type: Boolean }) public block: boolean
   @Prop({ type: Boolean }) public inactive: boolean
 
+  @Prop({ type: Boolean }) public fullwidth: boolean
+
   /** The desired color class. */
   public get colorClass () : string {
     return (
@@ -59,6 +61,7 @@ export default class extends Vue {
       this.loading ? 'is-loading' : '',
       this.block ? 'is-fullwidth' : '',
       this.inactive ? 'is-inactive' : '',
+      this.fullwidth ? 'is-fullwidth' : '',
     ]
   }
 

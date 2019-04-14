@@ -56,20 +56,10 @@
                 <Stateful :trigger="findPost">
                   <template #initial="{ fire, data }">
                     <form class="control" @submit.prevent="fire">
-                      <Action static large>
-                        <Out primary bold>@</Out>
-                      </Action>
-
-                      <input
-                        type="text"
-                        class="input is-large"
-                        placeholder="handle/username"
-                        autocorrect="off"
-                        v-model="data.handle"
-                      >
-
-                      <Action secondary large>
-                        <Out bold>Find Post</Out>
+                      <Action secondary large fullwidth>
+                        <Icon fab>instagram</Icon>
+                        &nbsp;&nbsp;
+                        <Out bold>Connect Instagram</Out>
                       </Action>
                     </form>
                   </template>
@@ -80,19 +70,7 @@
 
                   <template #failed="{ fire, data }">
                     <form class="control" @submit.prevent="fire">
-                      <Action static large>
-                        <Out primary bold>@</Out>
-                      </Action>
-
-                      <input
-                        type="text"
-                        class="input is-large"
-                        placeholder="handle/username"
-                        autocorrect="off"
-                        v-model="data.handle"
-                      >
-
-                      <Action danger large>
+                      <Action danger large fullwidth>
                         <Out bold>Try Again</Out>
                       </Action>
                     </form>
@@ -102,10 +80,21 @@
                     <Action success large block inactive>
                       <Out bold><Icon>check-circle</Icon></Out>
                       &nbsp;&nbsp;
-                      <Out bold>Post Found</Out>
+                      <Out bold>Account Connected</Out>
                     </Action>
                   </template>
                 </Stateful>
+
+                <p
+                  style="padding-top: 5px"
+                  class="has-text-grey is-size-7 has-text-centered"
+                >
+                  By connecting your account, you agree to our
+                  <router-link
+                    :to="{ name: 'privacy' }"
+                    class="has-text-grey has-text-underlined"
+                  >Privacy Policy</router-link>.
+                </p>
               </template>
             </Step>
 

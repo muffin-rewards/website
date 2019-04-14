@@ -10,7 +10,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
 
-  @Prop({ type: Boolean, default: true }) public fas: boolean
+  @Prop({ type: Boolean }) public fas: boolean
   @Prop({ type: Boolean }) public far: boolean
   @Prop({ type: Boolean }) public fab: boolean
 
@@ -24,7 +24,7 @@ export default class extends Vue {
       this.fas ? 'fas' :
       this.far ? 'far' :
       this.fab ? 'fab' :
-      ''
+      'fas'
     )
   }
 

@@ -36,6 +36,11 @@ const router: VueRouter = new VueRouter({
       },
     },
     {
+      path: '/privacy',
+      name: 'privacy',
+      component: () => import('@/views/Privacy.vue'),
+    },
+    {
       path: '/:slug',
       name: 'reward',
       component: () => import('@/views/Reward.vue'),

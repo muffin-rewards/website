@@ -84,7 +84,7 @@
 <script lang="ts">
 import { Getter } from 'vuex-class'
 import { Reward } from '@/types/models/Reward'
-import { Component, Vue, Prop, Provide } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component
 export default class extends Vue {

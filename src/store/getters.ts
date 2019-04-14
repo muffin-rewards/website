@@ -9,7 +9,7 @@ export const getters: GetterTree<State, State> = {
    * @return The list of rewards
    */
   rewardList (state: State) : Reward[] {
-    return state.rewardList
+    return state.rewardList.filter(r => r.show)
   },
 
   /**

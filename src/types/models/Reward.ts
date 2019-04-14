@@ -36,4 +36,9 @@ export interface Reward {
    */
   termsAndConditions: string[]
 
+  /**
+   * Whether we list reward on the homepage.
+   */
+  show: boolean
+
 }

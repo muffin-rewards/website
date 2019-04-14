@@ -26,8 +26,10 @@
 
             <Step>
               <template #step>1</template>
-              <template #title>Make in Instagram Post</template>
-              <template #subtitle>To qualify for the reward:</template>
+              <template #title>Connect Instagram</template>
+              <template #subtitle>
+                We need to connect with your Instagram to verify your post.
+              </template>
 
               <template #head>
                 <h1 class="title is-3">
@@ -36,21 +38,13 @@
 
                 <p class="subtitle is-7">
                   <!-- TODO: Details -->
-                  <Out grey-light>Show Details <Icon small>angle-down</Icon></Out>
+                  <Out grey-light>
+                    Offer Information <Icon small>info-circle</Icon>
+                  </Out>
                 </p>
               </template>
 
               <template #body>
-                <p>
-                  <Out secondary><Icon>map-marker-alt</Icon></Out>
-                  <Out grey-light>Post a photo at {{ reward.promoterName }}</Out>
-                </p>
-
-                <p>
-                  <Out secondary><Icon>at</Icon></Out>
-                  <Out grey-light>Tag <Out white bold>@{{ reward.promoter }}</Out> in the caption</Out>
-                </p>
-
                 <div class="content"></div>
 
                 <Stateful :trigger="findPost">
@@ -118,13 +112,24 @@
 
             <Step :locked="consentLocked">
               <template #step>2</template>
-              <template #title>Allow {{ reward.promoterName }} to Fetaure Your Photo</template>
-              <template #subtitle>{{ reward.promoterName }} might like to feature your photo. Tap below to give them permission.</template>
+              <template #title>Make in Instagram Post</template>
+              <template #subtitle>To qualify for the reward:</template>
 
               <template #body="{ locked }">
-                <figure class="image" v-if="locked">
-                  <img src="@/assets/images/photo-placeholder.png" alt="Photo Placeholder">
-                </figure>
+                <p>
+                  <Out secondary><Icon>map-marker-alt</Icon></Out>
+                  <Out grey-light>Post a photo at {{ reward.promoterName }}</Out>
+                </p>
+
+                <p>
+                  <Out secondary><Icon>comment-alt</Icon></Out>
+                  <Out grey-light>Tag <Out white bold>@{{ reward.promoter }}</Out> in the caption</Out>
+                </p>
+
+                <p>
+                  <Out secondary><Icon>th</Icon></Out>
+                  <Out grey-light><Out white bold>Make a post,</Out> not a story!</Out>
+                </p>
 
                 <div v-if="!locked && post.isSome()">
 

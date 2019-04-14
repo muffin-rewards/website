@@ -25,9 +25,17 @@
           </figure>
 
           <div class="reward-title">
-            {{ reward.name }}
-            <span class="has-text-primary has-text-weight-bold">@ </span>
-            <span class="has-text-weight-bold">{{ reward.promoterName }}</span>
+            <span class="has-text-weight-bold">
+              <Icon>award</Icon>
+              {{ reward.name }}
+            </span>
+          </div>
+
+          <div class="reward-promoter">
+            <span class="has-text-weight-bold">
+              <Icon fas>map-marker-alt</Icon>
+              {{ reward.promoterName }}
+            </span>
           </div>
         </router-link>
 

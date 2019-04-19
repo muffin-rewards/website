@@ -3,6 +3,7 @@ import VueRouter, { Route } from 'vue-router'
 import { Request } from '@/types/routing/Request'
 import { Middleware } from '@/types/routing/Middleware'
 
+import { AuthController } from '@/routing/controllers/AuthController'
 import { HomeController } from '@/routing/controllers/HomeController'
 import { RewardsController } from '@/routing/controllers/RewardsController'
 
@@ -46,6 +47,13 @@ const router: VueRouter = new VueRouter({
       component: () => import('@/views/Reward.vue'),
       meta: {
         controller: [RewardsController, 'show'],
+      },
+    },
+    {
+      path: '/auth/:provider',
+      name: 'auth',
+      meta: {
+        controller: [AuthController, 'callback'],
       },
     },
   ],

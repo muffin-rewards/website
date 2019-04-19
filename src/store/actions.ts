@@ -1,4 +1,4 @@
-import { rewards } from '@/awi'
+import { rewards } from '@/awis'
 import { State } from '@/types/store/State'
 import { Reward } from '@/types/models/Reward'
 import { ActionTree, ActionContext } from 'vuex'

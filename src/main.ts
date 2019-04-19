@@ -15,6 +15,4 @@ new Vue({
 }).$mount('#app')
 
 // TODO: Reset scroll.
-// TODO: Change reward list.
-// TODO: Extract a bunch of components.
 // TODO: Extract stuff to config.

@@ -8,6 +8,7 @@ $danger: #b83636
 $purple: #721C3E
 $family-sans-serif: Muli, sans-serif
 $family-secondary: Fira Sans, sans-serif
+$black-light: #2D2F47
 $black-ter: #1D1F37
 $black-bis: #0D0F2B
 $radius-medium: 0.25rem
@@ -94,6 +95,11 @@ $body-size: $size-6
     border-color: $success
     color: $white-ter
 
+  &.is-dark, &.is-dark:active, &.is-dark:focus, &.is-dark:hover
+    background: $black-light
+    border-color: $black-light
+    color: $grey-light
+
   &.is-static
     background: $white-ter
     border-color: $white-ter
@@ -126,7 +132,7 @@ $body-size: $size-6
   font-family: $family-secondary !important
 
 /**
- * Action.
+ * Badge.
  */
 
 .badge
@@ -329,3 +335,7 @@ input.input
   +tablet
     .control .input
       padding-left: 3em
+
+
+.spacer
+  height: 1rem

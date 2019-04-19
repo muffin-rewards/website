@@ -26,6 +26,7 @@ export default class extends Vue {
   @Prop({ type: Boolean }) public secondary: boolean
   @Prop({ type: Boolean }) public success: boolean
   @Prop({ type: Boolean }) public danger: boolean
+  @Prop({ type: Boolean }) public dark: boolean
   @Prop({ type: Boolean }) public static: boolean
 
   @Prop({ type: Boolean }) public loading: boolean
@@ -41,6 +42,7 @@ export default class extends Vue {
       this.secondary ? 'is-secondary' :
       this.success ? 'is-success' :
       this.danger ? 'is-danger' :
+      this.dark ? 'is-dark' :
       this.static ? 'is-static' :
       ''
     )

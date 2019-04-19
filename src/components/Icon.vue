@@ -19,6 +19,7 @@ export default class extends Vue {
   @Prop({ type: Boolean }) public large: boolean
 
   @Prop({ type: Boolean }) public spins: boolean
+  @Prop({ type: Boolean }) public fixed: boolean
 
   /** The desired type class. */
   public get typeClass () : string {
@@ -43,6 +44,7 @@ export default class extends Vue {
   public get extraClasses () : string[] {
     return [
       this.spins ? 'fa-spin' : '',
+      this.fixed ? 'fa-fw' : '',
     ]
   }
 

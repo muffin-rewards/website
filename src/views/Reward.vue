@@ -14,7 +14,7 @@
       </div>
     </header>
 
-    <section class="section is-pulled-up-touch">
+    <main class="section is-pulled-up-touch">
       <div class="container">
         <div class="columns">
           <div class="column">
@@ -36,18 +36,17 @@
                   <Out white uppercase>{{ reward.name }}</Out>
                 </h1>
 
-                <p class="subtitle is-7">
-                  <!-- TODO: Details -->
+                <p class="subtitle is-6">
                   <Out grey-light>
-                    Offer Information <Icon small>info-circle</Icon>
+                    Make an Instagram post, tag
+                    <Out bold>@{{ reward.promoter }}</Out>
+                    and claim your reward.
                   </Out>
                 </p>
               </template>
 
               <template #body>
-                <div class="content"></div>
-
-                <Stateful :trigger="findPost">
+                <Stateful :trigger="connectInstagram">
                   <template #initial="{ fire, data }">
                     <form class="control" @submit.prevent="fire">
                       <Action secondary large fullwidth>
@@ -83,15 +82,13 @@
                   </template>
                 </Stateful>
 
-                <p
-                  style="padding-top: .25em"
-                  class="has-text-grey is-size-7 has-text-centered"
-                >
-                  By connecting your account, you agree to our
-                  <router-link
-                    :to="{ name: 'privacy' }"
-                    class="has-text-grey has-text-underlined"
-                  >Privacy Policy</router-link>.
+                <div class="spacer"></div>
+
+                <p class="has-text-centered">
+                  <Out grey small>
+                    By connecting yout account, you agree to our
+                    <router-link :to="{ name: 'privacy' }">Privacy Policy</router-link>
+                  </Out>
                 </p>
               </template>
             </Step>
@@ -103,52 +100,41 @@
               -- Step 2
             -->
 
-            <Step :locked="consentLocked">
+            <Step :locked="postingLocked">
               <template #step>2</template>
               <template #title>Make an Instagram Post</template>
               <template #subtitle>To qualify for the reward:</template>
 
               <template #body="{ locked }">
-                <p>
-                  <Out secondary><Icon>map-marker-alt</Icon></Out>
-                  <Out grey-light>Post a photo at {{ reward.promoterName }}</Out>
-                </p>
+                <ul>
+                  <li>
+                    <Out secondary><Icon fixed>map-marker-alt</Icon></Out>
+                    &nbsp;
+                    <Out grey-light>Post a photo at {{ reward.promoterName }}</Out>
+                  </li>
 
-                <p>
-                  <Out secondary><Icon>comment-alt</Icon></Out>
-                  <Out grey-light>Tag <Out white bold>@{{ reward.promoter }}</Out> in the caption</Out>
-                </p>
+                  <li>
+                    <Out secondary><Icon fixed>at</Icon></Out>
+                    &nbsp;
+                    <Out grey-light>Tag <Out white bold>@{{ reward.promoter }}</Out> in the caption</Out>
+                  </li>
 
-                <p>
-                  <Out secondary><Icon>th</Icon></Out>
-                  <Out grey-light><Out white bold>Make a post,</Out> not a story!</Out>
-                </p>
+                  <li>
+                    <Out secondary><Icon fixed>th</Icon></Out>
+                    &nbsp;
+                    <Out grey-light><Out white bold>Make a post,</Out> not a story!</Out>
+                  </li>
+                </ul>
 
-                <div v-if="!locked && post.isSome()">
+                <div class="spacer"></div>
 
-                  <!-- Extract a post component. -->
-                  <div class="post">
-                    <figure class="image is-1by1">
-                      <img :src="post.unwrap().url" :alt="post.unwrap().caption">
-                    </figure>
-
-                    <div class="post-author is-flex-aligned">
-                      {{ post.unwrap().user }}
-                      &nbsp;
-                      <i class="fab fa-instagram"></i>
-                    </div>
-
-                    <div class="post-comment is-flex-aligned">
-                      {{ post.unwrap().caption }}
-                    </div>
-                  </div>
-
-                  <Stateful :trigger="consent">
+                <div v-if="!locked">
+                  <Stateful :trigger="findPost">
                     <template #initial="{ fire }">
                       <Action secondary large block @click="fire">
-                        <Out bold><Icon>handshake</Icon></Out>
+                        <Out bold><Icon>image</Icon></Out>
                         &nbsp;&nbsp;
-                        <Out bold>Yes, sure!</Out>
+                        <Out bold>I've Posted!</Out>
                       </Action>
                     </template>
 
@@ -166,10 +152,18 @@
 
                     <template #succeeded>
                       <Action success large inactive block>
-                        <Out bold>Thanks! We'll let them know</Out>
+                        <Out bold>Post Found</Out>
                       </Action>
                     </template>
                   </Stateful>
+
+                  <div class="spacer"></div>
+
+                  <Action dark large block el="a" :href="`instagram://user?username=${reward.promoter}`" target="_blank">
+                    <Out bold><Icon>external-link-square-alt</Icon></Out>
+                    &nbsp;&nbsp;
+                    <Out bold>Open Instagram</Out>
+                  </Action>
                 </div>
               </template>
             </Step>
@@ -214,12 +208,13 @@
                   </div>
 
                   <div class="voucher-foot">
-                    <div></div>
+                    &nbsp;
+                    <!-- <div></div>
                     <p class="is-flex-aligned">
                       jonnymatthews_
                       &nbsp;
                       <i class="fab fa-instagram"></i>
-                    </p>
+                    </p> -->
                   </div>
                 </div>
               </template>
@@ -228,7 +223,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </main>
   </div>
 </template>
 
@@ -236,12 +231,11 @@
 import Step from '@/components/reward/Step.vue'
 import Stateful from '@/components/Stateful.vue'
 
-import { mentions } from '@/awi'
+import { redeem } from '@/awis'
 import { Getter } from 'vuex-class'
-import { Optional, Some, None, ResponseType } from 'awi'
-import { Post } from '@/types/models/Post'
 import { Reward } from '@/types/models/Reward'
 import { Component, Vue } from 'vue-property-decorator'
+import { Optional, Some, None, ResponseType } from 'awi'
 
 @Component({
   components: { Stateful, Step },
@@ -255,14 +249,9 @@ export default class extends Vue {
   public reward: Reward
 
   /**
-   * The post to be used for the reward redemption.
-   */
-  public post: Optional<Post> = new None()
-
-  /**
    * Whether the consent step is locked.
    */
-  public consentLocked: boolean = true
+  public postingLocked: boolean = true
 
   /**
    * Whether the voucher step is locked.
@@ -270,10 +259,11 @@ export default class extends Vue {
   public voucherLocked: boolean = true
 
   /**
-   * Functionality to find the post.
+   * Functionality to connec the user's Instagram account.
    */
-  public async findPost (data: { handle: string }) : Promise<void> {
-    localStorage.setItem('token', undefined)
+  public async connectInstagram (data: { handle: string }) : Promise<void> {
+    // TODO: Revisit this...
+    localStorage.removeItem('token')
 
     window.open(
       `https://api.instagram.com/oauth/authorize/?client_id=` +
@@ -283,25 +273,30 @@ export default class extends Vue {
       'width=500,height=500',
     )
 
-    return new Promise((resolve) => {
+    await new Promise((resolve) => {
       const interval: number = setInterval(() => {
         if (!localStorage.getItem('token')) {
           return
         }
 
-        resolve(clearInterval(interval))
+        clearInterval(interval)
+        resolve()
       }, 500)
     })
+      .then(() => this.postingLocked = false)
   }
 
   /**
-   * Functionality to consent rights.
+   * Functionality to find a post on the user's Instagram account.
    */
-  public async consent () : Promise<void> {
-    await mentions()
-      .post(`muffinrewards/redeem/${this.post.unwrap().user}`)
-      // TODO: Remove.
-      .catch(() => undefined)
+  public async findPost () : Promise<void> {
+    await redeem()
+      .use(async req => req.body = {
+        token: localStorage.token,
+        promoter: this.reward.promoter,
+        slug: this.reward.slug,
+      })
+      .post()
       .then(() => this.voucherLocked = false)
   }
 

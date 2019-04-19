@@ -15,5 +15,5 @@ export const rewards: () => Client = () => base()
 /**
  * The mentions rest endpoint.
  */
-export const mentions: () => Client = () => base()
-  .use(async req => req.base = `${req.base}/mentions`)
+export const redeem: () => Client = () => base()
+  .use(async req => req.base = `${req.base}/legacy/redeem`)

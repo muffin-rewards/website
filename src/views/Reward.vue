@@ -37,12 +37,17 @@
                 </h1>
 
                 <p class="subtitle is-6">
-                  <Out grey-light>
+                  <Out grey-lighter>
                     Make an Instagram post, tag
                     <Out bold>@{{ reward.promoter }}</Out>
                     and claim your reward.
                   </Out>
                 </p>
+
+                <Out grey-lighter bold @click="rewardInfoActive = true">
+                  Offer Information
+                  <Icon>info-circle</Icon>
+                </Out>
               </template>
 
               <template #body>
@@ -224,12 +229,19 @@
         </div>
       </div>
     </main>
+
+    <RewardInfo
+      :active="rewardInfoActive"
+      @close="rewardInfoActive = false"
+      :reward="reward"
+    ></RewardInfo>
   </div>
 </template>
 
 <script lang="ts">
 import Step from '@/components/reward/Step.vue'
 import Stateful from '@/components/Stateful.vue'
+import RewardInfo from '@/components/takeovers/RewardInfo.vue'
 
 import { redeem } from '@/awis'
 import { Getter } from 'vuex-class'
@@ -238,7 +250,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import { Optional, Some, None, ResponseType } from 'awi'
 
 @Component({
-  components: { Stateful, Step },
+  components: { RewardInfo, Stateful, Step },
 })
 export default class extends Vue {
 
@@ -247,6 +259,11 @@ export default class extends Vue {
    */
   @Getter('currentReward')
   public reward: Reward
+
+  /**
+   * Whether reward info take over is active.
+   */
+  public rewardInfoActive: boolean = false
 
   /**
    * Whether the consent step is locked.

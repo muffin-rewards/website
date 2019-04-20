@@ -14,6 +14,7 @@ $black-bis: #0D0F2B
 $radius-medium: 0.25rem
 $radius-large: 1rem
 $body-background-color: $black-bis
+$footer-background-color: $black-bis
 
 $size-1: 48px
 $size-2: 32px
@@ -35,6 +36,20 @@ $body-size: $size-6
 
 .title
   font-family: $family-secondary
+
+  &.is-underlined
+    position: relative
+    z-index: 1
+
+    &::before
+      background: rgba($primary, 0.6)
+      bottom: 0.125rem
+      content: ''
+      height: 0.5rem
+      left: -0.25rem
+      position: absolute
+      width: calc(100% + 0.5rem)
+      z-index: -1
 
 /**
  * Banner.
@@ -339,3 +354,51 @@ input.input
 
 .spacer
   height: 1rem
+
+/**
+ * Takeover element.
+ */
+
+.takeover
+  background: $black-bis
+  display: none
+  flex-direction: column
+  height: 100%
+  left: 0
+  position: fixed
+  top: 0
+  width: 100%
+  z-index: 1000
+
+  &.is-active
+    display: flex
+
+  .takeover-title
+    align-items: center
+    border-bottom: 1px solid $black-light
+    display: flex
+    justify-content: space-between
+    padding: 1.5rem
+
+    .delete
+      background: white
+
+      &::before, &::after
+        background: $black-bis
+
+  .takeover-head
+    border-bottom: 1px solid $black-light
+    color: white
+    padding: 1.5rem
+
+  .takeover-body
+    background: $black-ter
+    color: white
+    flex: 1
+    overflow-y: auto
+    padding: 1.5rem
+
+  .takeover-foot
+    background: $black-ter
+    color: white
+    padding: 1.5rem

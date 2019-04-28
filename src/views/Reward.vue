@@ -91,7 +91,7 @@
 
                 <p class="has-text-centered">
                   <Out grey small>
-                    By connecting yout account, you agree to our
+                    By connecting your account, you agree to our
                     <router-link :to="{ name: 'privacy' }">Privacy Policy</router-link>
                   </Out>
                 </p>

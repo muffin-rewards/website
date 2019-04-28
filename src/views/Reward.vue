@@ -164,7 +164,7 @@
 
                   <div class="spacer"></div>
 
-                  <Action dark large block el="a" :href="`instagram://user?username=${reward.promoter}`" target="_blank">
+                  <Action dark large block el="a" :href="`instagram://camera`" target="_blank">
                     <Out bold><Icon>external-link-square-alt</Icon></Out>
                     &nbsp;&nbsp;
                     <Out bold>Open Instagram</Out>

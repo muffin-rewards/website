@@ -91,7 +91,7 @@
 
                 <p class="has-text-centered">
                   <Out grey small>
-                    By connecting yout account, you agree to our
+                    By connecting your account, you agree to our
                     <router-link :to="{ name: 'privacy' }">Privacy Policy</router-link>
                   </Out>
                 </p>
@@ -164,7 +164,7 @@
 
                   <div class="spacer"></div>
 
-                  <Action dark large block el="a" :href="`instagram://user?username=${reward.promoter}`" target="_blank">
+                  <Action dark large block el="a" :href="`instagram://camera`" target="_blank">
                     <Out bold><Icon>external-link-square-alt</Icon></Out>
                     &nbsp;&nbsp;
                     <Out bold>Open Instagram</Out>

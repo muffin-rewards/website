@@ -38,7 +38,7 @@
 
                 <p class="subtitle is-6">
                   <Out grey-lighter>
-                    Make an Instagram post, tag
+                    Make an Instagram post, mention
                     <Out bold>@{{ reward.promoter }}</Out>
                     and claim your reward.
                   </Out>
@@ -121,7 +121,7 @@
                   <li>
                     <Out secondary><Icon fixed>at</Icon></Out>
                     &nbsp;
-                    <Out grey-light>Tag <Out white bold>@{{ reward.promoter }}</Out> in the caption</Out>
+                    <Out grey-light>Mention <Out white bold>@{{ reward.promoter }}</Out> in the caption</Out>
                   </li>
 
                   <li>

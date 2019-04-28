@@ -21,7 +21,7 @@
           There are three main reasons why Muffin won’t be able to find your post.
 
           <ol>
-            <li>You have made an Instagram post not story</li>
+            <li>You have made an Instagram story not post</li>
             <li>You have not mentioned the account handle in the caption</li>
             <li>You connected an account that is different to the one posting the image. Check which account you connected by tapping <a href="https://www.instagram.com/accounts/edit/" target="_blank">here</a>.</li>
           </ol>

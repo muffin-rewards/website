@@ -285,7 +285,7 @@ export default class extends Vue {
     window.open(
       `https://api.instagram.com/oauth/authorize/?client_id=` +
       `9a3d541ecf8d4fcfba7a1b6af94ecfe3&redirect_uri=${location.origin}` +
-      `/auth/instagram&response_type=token`,
+      `/auth/instagram&response_type=token&hl=en`,
       'Connect Instagram',
       'width=500,height=500',
     )

@@ -8,7 +8,6 @@
               <img src="@/assets/images/muffin-logo.png" alt="Muffin">
             </router-link>
           </div>
-          <div class="nav-spacer"></div>
         </nav>
       </div>
     </header>

@@ -20,4 +20,12 @@ export const getters: GetterTree<State, State> = {
     return state.currentReward.unwrap()
   },
 
+  /**
+   * @param state The current state
+   * @return Whether a spinning wheel should be displayed
+   */
+  isViewLoading (state: State) : boolean {
+    return state.isViewLoading
+  },
+
 }

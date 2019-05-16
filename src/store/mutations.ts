@@ -21,4 +21,12 @@ export const mutations: MutationTree<State> = {
     state.currentReward = reward
   },
 
+  /**
+   * @param state The current state
+   * @param isLoading Whether current view is loading
+   */
+  updateViewLoadingStatus (state: State, isLoading: boolean) : void {
+    state.isViewLoading = isLoading
+  },
+
 }

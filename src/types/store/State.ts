@@ -13,4 +13,10 @@ export interface State {
    */
   currentReward: Optional<Reward>
 
+  /**
+   * Whether a view is being loaded. If this flag is true, we show just a
+   * spinning wheel.
+   */
+  isViewLoading: boolean
+
 }

@@ -282,7 +282,7 @@ export default class extends Vue {
     // TODO: Revisit this...
     localStorage.removeItem('token')
 
-    window.open(
+    const tab: Window = window.open(
       `https://api.instagram.com/oauth/authorize/?client_id=` +
       `9a3d541ecf8d4fcfba7a1b6af94ecfe3&redirect_uri=${location.origin}` +
       `/auth/instagram&response_type=token&hl=en`,
@@ -290,10 +290,14 @@ export default class extends Vue {
       'width=500,height=500',
     )
 
-    await new Promise((resolve) => {
+    await new Promise((resolve, reject) => {
       const interval: number = setInterval(() => {
         if (!localStorage.getItem('token')) {
           return
+        }
+
+        if (localStorage.getItem('token') === 'error') {
+          reject()
         }
 
         clearInterval(interval)
@@ -301,6 +305,12 @@ export default class extends Vue {
       }, 500)
     })
       .then(() => this.postingLocked = false)
+
+    try {
+      tab.close()
+    } catch {
+      // Tab was already closed.
+    }
   }
 
   /**
@@ -309,7 +319,7 @@ export default class extends Vue {
   public async findPost () : Promise<void> {
     await redeem()
       .use(async req => req.body = {
-        token: localStorage.token,
+        token: localStorage.getItem('token'),
         promoter: this.reward.promoter,
         slug: this.reward.slug,
       })

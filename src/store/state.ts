@@ -4,4 +4,5 @@ import { None } from '@bausano/data-structures'
 export const state: State = {
   rewardList: [],
   currentReward: new None(),
+  isViewLoading: false,
 }

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../store'
 import VueRouter, { Route } from 'vue-router'
 import { Request } from '@/types/routing/Request'
 import { Middleware } from '@/types/routing/Middleware'
@@ -69,12 +70,17 @@ router.beforeEach((to: Route, from: Route, next: any) : void => {
   const middleware: Middleware[] = to.meta.middleware || []
   const request: Request = { to, from }
 
+  // We display loading spinning wheel.
+  store.commit('updateViewLoadingStatus', true)
+
   middleware.reduce(async (carry, mw) => {
     return carry.then(mw)
   }, Promise.resolve(request))
     .then(result => controller ? Promise.resolve(result) : Promise.reject())
     .then(result => new controller[0]()[controller[1]](result))
     .then(next, next)
+    // Hide the spinning wheel.
+    .finally(() => store.commit('updateViewLoadingStatus', false))
 })
 
 export default router

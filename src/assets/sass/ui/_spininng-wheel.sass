@@ -1,0 +1,19 @@
++keyframes(Spin)
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+$spinning-wheel-size: 120px
+$spinning-wheel-width: 10px
+
+.spinning-wheel
+  position: absolute
+  top: calc(50% - #{$spinning-wheel-size} / 2)
+  left: calc(50% - #{$spinning-wheel-size} / 2)
+  border: $spinning-wheel-width solid rgba($grey-lighter, .5)
+  border-top: $spinning-wheel-width solid $primary
+  border-radius: 50%
+  width: $spinning-wheel-size
+  height: $spinning-wheel-size
+  animation: Spin 2s linear infinite

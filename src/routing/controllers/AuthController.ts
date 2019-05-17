@@ -12,7 +12,8 @@ export class AuthController extends Controller {
       (to.hash || 'error').replace('#access_token=', ''),
     )
 
-    return window.close()
+    return new Promise(resolve => setTimeout(resolve, 500))
+      .then(() => window.close())
   }
 
 }

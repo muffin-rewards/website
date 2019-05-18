@@ -68,7 +68,7 @@ export default class extends Vue {
    */
   public steps: Step[] = [
     {
-      description: 'Go to getmuffin.co.uk and select this restaurant.',
+      description: 'Browse the offers and select a venue.',
       icon: {
         collection: 'fas',
         name: 'search-location',
@@ -81,18 +81,18 @@ export default class extends Vue {
         collection: 'fab',
         name: 'instagram',
       },
-      title: 'Login via Instagram',
+      title: 'Connect Instagram',
     },
     {
-      description: 'You must add this restaurant as the location to qualify for the reward.',
+      description: 'Open Instagram and post a photo in the venue - you must mention the venues @handle in the caption.',
       icon: {
         collection: 'fas',
         name: 'image',
       },
-      title: 'Make Post',
+      title: 'Make an Instagram Post',
     },
     {
-      description: 'Show the reward to a member of staff and claim your reward.',
+      description: 'Show the voucher to a member of staff and claim your reward.',
       icon: {
         collection: 'fas',
         name: 'award',

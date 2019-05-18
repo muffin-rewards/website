@@ -97,6 +97,11 @@ $body-size: $size-6
   .step-body
     padding: 1rem
 
+    .step-icon
+      color: $white
+      margin: 0 1.5rem
+      font-size: $size-4
+
 /**
  * Buttons.
  */
@@ -343,7 +348,6 @@ input.input
 
   .control
     .input
-      max-width: 400px
       color: $grey-light
 
       &::placeholder
@@ -408,3 +412,16 @@ input.input
     background: $black-ter
     color: white
     padding: 1.5rem
+
+/**
+ * Temporary elements that have to be refactored.
+ */
+
+.dektop-column-view
+  +tablet
+    margin: auto
+    max-width: 400px
+
+.reward-view
+
+

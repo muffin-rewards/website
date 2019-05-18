@@ -1,18 +1,20 @@
 <template>
   <div>
-    <header class="banner is-2by1" :style="{ 'background-image': `url(${reward.image})` }">
-      <div class="banner-head">
-        <router-link :to="{ name: 'home' }" class="badge is-faded">
-          <Out white><Icon small>arrow-left</Icon></Out>
-        </router-link>
+    <div class="container">
+      <header class="banner is-2by1" :style="{ 'background-image': `url(${reward.image})` }">
+        <div class="banner-head">
+          <router-link :to="{ name: 'home' }" class="badge is-faded">
+            <Out white><Icon small>arrow-left</Icon></Out>
+          </router-link>
 
-        <span class="badge is-padded">
-          <Out white><Icon small>map-marker-alt</Icon></Out>
-          &nbsp;
-          <Out white>{{ reward.promoterName }}</Out>
-        </span>
-      </div>
-    </header>
+          <span class="badge is-padded">
+            <Out white><Icon small>map-marker-alt</Icon></Out>
+            &nbsp;
+            <Out white>{{ reward.promoterName }}</Out>
+          </span>
+        </div>
+      </header>
+    </div>
 
     <main class="section is-pulled-up-touch">
       <div class="container">

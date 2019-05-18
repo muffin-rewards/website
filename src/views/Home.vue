@@ -16,23 +16,31 @@
       <div class="container">
         <div class="columns">
           <div class="column">
-            <span class="title has-text-white is-hidden-mobile">Search</span>
+            <div class="dektop-column-view">
+              <div>
+                <span class="title has-text-white is-hidden-mobile">Filter</span>
 
-            <div class="search">
-              <p class="control has-icons-left has-icons-right">
-                <input
-                  type="text"
-                  v-model="search"
-                  placeholder="Find a location..."
-                  class="input search-input is-large has-background-black-ter is-size-6"
-                >
-                <span class="icon is-small is-left is-hidden-mobile">
-                  <i class="fa-search fas"></i>
-                </span>
-                <span class="icon is-small is-right is-hidden-tablet">
-                  <i class="fa-search fas"></i>
-                </span>
-              </p>
+                <div class="search">
+                  <p class="control has-icons-left has-icons-right">
+                    <input
+                      type="text"
+                      v-model="search"
+                      placeholder="Find a location..."
+                      class="input search-input is-large has-background-black-ter is-size-6"
+                    >
+                    <span class="icon is-small is-left is-hidden-mobile">
+                      <i class="fa-search fas"></i>
+                    </span>
+                    <span class="icon is-small is-right is-hidden-tablet">
+                      <i class="fa-search fas"></i>
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="spacer"></div>
+
+              <how-muffin-works class="is-hidden-mobile"></how-muffin-works>
             </div>
           </div>
 
@@ -84,8 +92,11 @@
 import { Getter } from 'vuex-class'
 import { Reward } from '@/types/models/Reward'
 import { Component, Vue } from 'vue-property-decorator'
+import HowMuffinWorks from '@/components/home/HowMuffinWorks.vue'
 
-@Component
+@Component({
+  components: { HowMuffinWorks },
+})
 export default class extends Vue {
 
   /**

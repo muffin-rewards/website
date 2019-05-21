@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
-enum State {
+export enum State {
   INITIAL = 'initial',
   FIRED = 'fired',
   FAILED = 'failed',
@@ -51,6 +51,15 @@ export default class extends Vue {
       .catch(() => {
         this.state = State.FAILED
       })
+  }
+
+  /**
+   * Forces the component to go into given state.
+   *
+   * @param state New state
+   */
+  public setState (state: State) : void {
+    this.state = state
   }
 
 }

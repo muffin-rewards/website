@@ -1,3 +1,4 @@
+import router from '..'
 import { Request } from '@/types/routing/Request'
 import { Controller } from '@/routing/controllers/Controller'
 
@@ -12,8 +13,10 @@ export class AuthController extends Controller {
       (to.hash || 'error').replace('#access_token=', ''),
     )
 
-    return new Promise(resolve => setTimeout(resolve, 500))
-      .then(() => window.close())
+    // TODO: Handle null.
+    const slug: string = localStorage.getItem('slug')
+
+    router.replace(`/${slug}`)
   }
 
 }

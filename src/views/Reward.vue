@@ -53,7 +53,7 @@
               </template>
 
               <template #body>
-                <Stateful :trigger="connectInstagram">
+                <Stateful :trigger="connectInstagram" ref="connectInstagram">
                   <template #initial="{ fire, data }">
                     <form class="control" @submit.prevent="fire">
                       <Action secondary large fullwidth>
@@ -80,12 +80,14 @@
                     </form>
                   </template>
 
-                  <template #succeeded>
-                    <Action success large block inactive>
-                      <Out bold><Icon>check-circle</Icon></Out>
-                      &nbsp;&nbsp;
-                      <Out bold>Account Connected</Out>
-                    </Action>
+                  <template #succeeded="{ fire, data }">
+                    <form class="control" @submit.prevent="fire">
+                      <Action success large block>
+                        <Out bold><Icon>check-circle</Icon></Out>
+                        &nbsp;&nbsp;
+                        <Out bold>Account Connected</Out>
+                      </Action>
+                    </form>
                   </template>
                 </Stateful>
 
@@ -242,8 +244,8 @@
 
 <script lang="ts">
 import Step from '@/components/reward/Step.vue'
-import Stateful from '@/components/Stateful.vue'
 import RewardInfo from '@/components/takeovers/RewardInfo.vue'
+import { default as Stateful, State} from '@/components/Stateful.vue'
 
 import { redeem } from '@/awis'
 import { Getter } from 'vuex-class'
@@ -278,41 +280,37 @@ export default class extends Vue {
   public voucherLocked: boolean = true
 
   /**
+   * Mounted lifecycle hook checks for existence of token in the localStorage.
+   */
+  public mounted () : void {
+    const token: string = localStorage.getItem('token')
+
+    if (!token) {
+      return
+    }
+
+    if (token === 'error') {
+      return (this.$refs.connectInstagram as Stateful).setState(State.FAILED)
+    }
+
+    (this.$refs.connectInstagram as Stateful).setState(State.SUCCEEDED)
+    this.postingLocked = false
+  }
+
+  /**
    * Functionality to connec the user's Instagram account.
    */
   public async connectInstagram (data: { handle: string }) : Promise<void> {
-    // TODO: Revisit this...
     localStorage.removeItem('token')
+    localStorage.setItem('slug', this.reward.slug)
 
-    const tab: Window = window.open(
+    window.location.href =
       `https://api.instagram.com/oauth/authorize/?client_id=` +
       `9a3d541ecf8d4fcfba7a1b6af94ecfe3&redirect_uri=${location.origin}` +
-      `/auth/instagram&response_type=token&hl=en`,
-      'Connect Instagram',
-      'width=500,height=500',
-    )
+      `/auth/instagram&response_type=token&hl=en`
 
-    await new Promise((resolve, reject) => {
-      const interval: number = setInterval(() => {
-        if (!localStorage.getItem('token')) {
-          return
-        }
-
-        if (localStorage.getItem('token') === 'error') {
-          reject()
-        }
-
-        clearInterval(interval)
-        resolve()
-      }, 500)
-    })
-      .then(() => this.postingLocked = false)
-
-    try {
-      tab.close()
-    } catch {
-      // Tab was already closed.
-    }
+    // TODO: Set this in the config.
+    return new Promise((_, reject) => setTimeout(reject, 10000))
   }
 
   /**

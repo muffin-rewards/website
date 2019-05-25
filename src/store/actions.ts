@@ -22,7 +22,13 @@ export const actions: ActionTree<State, State> = {
    * @param slug The reward slug
    */
   async loadCurrentReward ({ state, commit }: ActionContext<State, State>, slug: string) : Promise<void> {
-    commit('updateCurrentReward', new Some(state.rewardList.find(r => r.slug === slug)))
+    const reward: Reward = state.rewardList.find(r => r.slug === slug)
+
+    if (reward === undefined) {
+      return Promise.reject()
+    }
+
+    commit('updateCurrentReward', new Some(reward))
     // return rewards()
     //   .optional<Reward>(slug)
     //   .then(body => commit('updateCurrentReward', body))

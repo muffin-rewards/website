@@ -155,12 +155,14 @@
                       <Action danger large block @click="fire">
                         <Out bold><Icon>exclamation-circle</Icon></Out>
                         &nbsp;&nbsp;
-                        <Out bold>Try again</Out>
+                        <Out bold v-text="findPostError"></Out>
                       </Action>
                     </template>
 
                     <template #succeeded>
                       <Action success large inactive block>
+                        <Out bold><Icon>check-circle</Icon></Out>
+                        &nbsp;&nbsp;
                         <Out bold>Post Found</Out>
                       </Action>
                     </template>
@@ -216,15 +218,30 @@
                     </div>
                   </div>
 
-                  <div class="voucher-foot">
-                    &nbsp;
+                  <div class="voucher-foot" v-if="!claimed">
+                    <Action large block class="has-text-purple" @click="claim">
+                      <Out bold><Icon>user-tie</Icon></Out>
+                      &nbsp;&nbsp;
+                      <Out bold>Claim Reward</Out>
+                    </Action>
+                  </div>
+
+                  <div class="voucher-foot" v-else>
+                    <Action
+                      large block dark
+                      class="has-background-black-ter has-text-white"
+                    >
+                      <Out bold><Icon>check-circle</Icon></Out>
+                      &nbsp;&nbsp;
+                      <Out bold>Reward Claimed</Out>
+                    </Action>
+                  </div>
                     <!-- <div></div>
                     <p class="is-flex-aligned">
                       jonnymatthews_
                       &nbsp;
                       <i class="fab fa-instagram"></i>
                     </p> -->
-                  </div>
                 </div>
               </template>
             </Step>
@@ -280,9 +297,22 @@ export default class extends Vue {
   public voucherLocked: boolean = true
 
   /**
+   * Whether the reward was already claimed.
+   */
+  public claimed: boolean = false
+
+  /**
+   * Error message that is displayed on the error button. This is dynamically
+   * changed based on the error received from the APIs.
+   */
+  public findPostError: string = 'Try Again'
+
+  /**
    * Mounted lifecycle hook checks for existence of token in the localStorage.
    */
   public mounted () : void {
+    this.claimed = !!localStorage.getItem(`reward-timeout-${this.reward.slug}`)
+
     const token: string = localStorage.getItem('token')
 
     if (!token) {
@@ -324,8 +354,25 @@ export default class extends Vue {
         slug: this.reward.slug,
       })
       .post()
+      .catch(({ body }) => {
+        this.findPostError = body.label
+
+        return Promise.reject()
+      })
       .then(() => this.voucherLocked = false)
   }
 
+  /**
+   * Claims the reward making it inactive.
+   */
+  public claim () : void {
+    if (!confirm(`Confirm you're a member of staff. After tapping ‘OK’ the reward will have been redeemed.`)) {
+      return
+    }
+
+    localStorage.setItem(`reward-timeout-${this.reward.slug}`, String(Date.now()))
+
+    this.claimed = true
+  }
 }
 </script>
